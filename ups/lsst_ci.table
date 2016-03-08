@@ -8,3 +8,5 @@ setupRequired(testdata_decam)
 setupRequired(obs_subaru)
 setupRequired(obs_cfht)
 setupRequired(obs_decam)
+
+setupRequired(obs_lsstSim)
