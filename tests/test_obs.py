@@ -27,17 +27,24 @@ import unittest
 
 import lsst.utils.tests
 
+# Is there a recommended standard way to do this
+# lookup of a package installed file location?
 executable_dir = os.path.join(os.getenv('VALIDATE_DRP_DIR'), "examples")
 
 
 class ExampleObsTestCase(lsst.utils.tests.ExecutablesTestCase):
     """Test an example obs_ processing run."""
     def testObsCfhtQuick(self):
-        # Is there a recommended standard way to do this
-        # lookup of a package installed file location?
+        """Test obs_cfht"""
         self.assertExecutable("runCfhtQuickTest.sh",
                               root_dir=executable_dir,
                               msg="CFHT Quick Test failed")
+
+    def testObsDecamQuick(self):
+        """Test obs_decam"""
+        self.assertExecutable("runDecamQuickTest.sh",
+                              root_dir=executable_dir,
+                              msg="DECam Quick Test failed")
 
 
 if __name__ == "__main__":
