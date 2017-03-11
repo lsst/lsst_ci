@@ -25,11 +25,12 @@ from __future__ import print_function
 import os
 import unittest
 
+import lsst.utils
 import lsst.utils.tests
 
-# Is there a recommended standard way to do this
-# lookup of a package installed file location?
-executable_dir = os.path.join(os.getenv('VALIDATE_DRP_DIR'), "examples")
+executable_dir = os.path.join(
+    lsst.utils.getPackageDir("VALIDATE_DRP"),
+    "examples")
 
 
 class ExampleObsTestCase(lsst.utils.tests.ExecutablesTestCase):
