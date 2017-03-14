@@ -32,19 +32,20 @@ executable_dir = os.path.join(
     lsst.utils.getPackageDir("VALIDATE_DRP"),
     "examples")
 
-
 class ExampleObsTestCase(lsst.utils.tests.ExecutablesTestCase):
     """Test an example obs_ processing run."""
     def testObsCfhtQuick(self):
         """Test obs_cfht"""
         self.assertExecutable("runCfhtQuickTest.sh",
                               root_dir=executable_dir,
+                              args=["--noplot"],
                               msg="CFHT Quick Test failed")
 
     def testObsDecamQuick(self):
         """Test obs_decam"""
         self.assertExecutable("runDecamQuickTest.sh",
                               root_dir=executable_dir,
+                              args=["--noplot"],
                               msg="DECam Quick Test failed")
 
 
