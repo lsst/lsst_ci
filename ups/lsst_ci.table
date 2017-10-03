@@ -15,3 +15,4 @@ setupRequired(validation_data_cfht)
 setupRequired(validation_data_decam)
 
 setupRequired(validate_drp)
+setupRequired(ci_ctio0m9)
