@@ -38,14 +38,14 @@ class ExampleObsTestCase(lsst.utils.tests.ExecutablesTestCase):
         """Test obs_cfht"""
         self.assertExecutable("runCfhtQuickTest.sh",
                               root_dir=executable_dir,
-                              args=["--", "--noplot"],
+                              args=["--noplot"],
                               msg="CFHT Quick Test failed")
 
     def testObsDecamQuick(self):
         """Test obs_decam"""
         self.assertExecutable("runDecamQuickTest.sh",
                               root_dir=executable_dir,
-                              args=["--", "--noplot"],
+                              args=["--noplot"],
                               msg="DECam Quick Test failed")
 
 
