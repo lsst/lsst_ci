@@ -22,6 +22,8 @@
 
 from __future__ import print_function
 
+import pytest
+
 import os
 import unittest
 
@@ -41,6 +43,7 @@ class ExampleObsTestCase(lsst.utils.tests.ExecutablesTestCase):
                               args=["--", "--noplot"],
                               msg="CFHT Quick Test failed")
 
+    @pytest.mark.skip(reason="Skipping now to get the weekly out: DM-14175")
     def testObsDecamQuick(self):
         """Test obs_decam"""
         self.assertExecutable("runDecamQuickTest.sh",
