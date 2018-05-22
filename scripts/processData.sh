@@ -45,7 +45,10 @@ while getopts "c:m:v:f:i:e:a:d:hr" option; do
 done
 shift $((OPTIND-1))
 
-PRODUCT_DIR=${VALIDATE_DRP_DIR}
+PRODUCT_DIR=${LSST_CI_DIR}
+if [[ ${PRODUCT_DIR} == '' ]]; then
+    PRODUCT_DIR='.'
+fi
 # OS X El Capitan SIP swallows DYLD_LIBRARY_PATH so export the duplicate in LSST_LIBRARY_PATH
 if [[ -z $DYLD_LIBRARY_PATH ]]; then
     export DYLD_LIBRARY_PATH=$LSST_LIBRARY_PATH
