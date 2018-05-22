@@ -30,9 +30,8 @@ import unittest
 import lsst.utils
 import lsst.utils.tests
 
-executable_dir = os.path.join(
-    lsst.utils.getPackageDir("VALIDATE_DRP"),
-    "examples")
+executable_dir = 'scripts'
+
 
 class ExampleObsTestCase(lsst.utils.tests.ExecutablesTestCase):
     """Test an example obs_ processing run."""
