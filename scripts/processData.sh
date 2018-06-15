@@ -12,7 +12,7 @@ ASTROMDIR=astrometry_net_data
 
 usage() {
     print_error
-    print_error "Usage: $0 [-cmvfiear] [-h]"
+    print_error "Usage: $0 [-cmvfioear] [-h]"
     print_error
     print_error "Specifc options:"
     print_error "   -c          Camera"
@@ -20,6 +20,7 @@ usage() {
     print_error "   -v          Validation data"
     print_error "   -f          Config file"
     print_error "   -i          Ingest script"
+    print_error "   -o          Extra options for ingest script"
     print_error "   -e          Extension to ingest"
     print_error "   -a          Name of astrometry to load"
     print_error "   -r          Reduce from raw?  Implies there is a CALIB directory"
@@ -28,13 +29,14 @@ usage() {
     exit 1
 }
 
-while getopts "c:m:v:f:i:e:a:d:hr" option; do
+while getopts "c:m:v:f:i:o:e:a:d:hr" option; do
     case "$option" in
         c)  CAMERA="$OPTARG";;
         m)  MAPPER="$OPTARG";;
         v)  VALIDATION_DATA="$OPTARG";;
         f)  CONFIG_FILE="$OPTARG";;
         i)  INGEST="$OPTARG";;
+        o)  INGESTARGS="$OPTARG";;
         e)  INGESTEXT="$OPTARG";;
         a)  ASTROMDIR="$OPTARG";;
         r)  DOCALIB=true;;
@@ -70,7 +72,7 @@ echo "$MAPPER" > "${INPUT}"/_mapper
 
 # ingest raw data
 RAWDATA=${VALIDATION_DATA}
-$INGEST "${INPUT}" "${RAWDATA}"/*."${INGESTEXT}" --mode link
+$INGEST "${INPUT}" "${RAWDATA}"/*."${INGESTEXT}" --mode link ${INGESTARGS}
 
 # set up calibs
 if [[ $DOCALIB == true ]]; then
