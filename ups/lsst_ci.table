@@ -1,18 +1,11 @@
 setupRequired(lsst_apps)
 setupRequired(lsst_distrib)
 
-setupRequired(testdata_subaru)
-setupRequired(testdata_cfht)
-setupRequired(testdata_decam)
-setupRequired(obs_subaru)
 setupRequired(obs_cfht)
 setupRequired(obs_decam)
 
-setupRequired(obs_lsstSim)
-setupRequired(obs_sdss)
 
 setupRequired(validation_data_cfht)
 setupRequired(validation_data_decam)
 
 setupRequired(validate_drp)
-setupRequired(ci_ctio0m9)
