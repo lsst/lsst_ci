@@ -7,6 +7,7 @@ if [[ ${PRODUCT_DIR} == '' ]]; then
     PRODUCT_DIR='.'
 fi
 VALIDATION_DATA_DIR="$VALIDATION_DATA_HSC_DIR/raw"
+PHOTOMETRIC_REF_CAT_DIR="$VALIDATION_DATA_HSC_DIR/ref_cats"
 CALIB_DATA="$VALIDATION_DATA_HSC_DIR/CALIB"
 
 CAMERA=Hsc
@@ -47,9 +48,9 @@ if [[ $DOPROCESS == true ]]; then
         -c "$CAMERA" \
         -m "$MAPPER" \
         -v "$VALIDATION_DATA_DIR" \
+        -p "$PHOTOMETRIC_REF_CAT_DIR" \
         -f "$CONFIG_FILE" \
         -e "fits" \
-        -a "$ASTROMDIR" \
         -d "$CALIB_DATA" \
         -r
 fi

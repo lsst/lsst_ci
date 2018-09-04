@@ -7,6 +7,7 @@ if [[ ${PRODUCT_DIR} == '' ]]; then
     PRODUCT_DIR='.'
 fi
 VALIDATION_DATA_DIR="$VALIDATION_DATA_CFHT_DIR/raw"
+PHOTOMETRIC_REF_CAT_DIR="$VALIDATION_DATA_CFHT_DIR/ref_cats"
 
 CAMERA=Cfht
 CONFIG_FILE="${PRODUCT_DIR}/config/cfhtConfig.py"
@@ -45,6 +46,7 @@ if [[ $DOPROCESS == true ]]; then
         -c "$CAMERA" \
         -m "$MAPPER" \
         -v "$VALIDATION_DATA_DIR" \
+        -p "$PHOTOMETRIC_REF_CAT_DIR" \
         -f "$CONFIG_FILE"
 fi
 

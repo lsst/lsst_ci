@@ -7,6 +7,7 @@ if [[ ${PRODUCT_DIR} == '' ]]; then
     PRODUCT_DIR='.'
 fi
 VALIDATION_DATA_DIR="$VALIDATION_DATA_DECAM_DIR/instcal"
+PHOTOMETRIC_REF_CAT_DIR="$VALIDATION_DATA_DECAM_DIR/ref_cats"
 
 CAMERA=DecamQuick
 CONFIG_FILE="${PRODUCT_DIR}/config/decamConfig.py"
@@ -45,6 +46,7 @@ if [[ $DOPROCESS == true ]]; then
         -c "$CAMERA" \
         -m "$MAPPER" \
         -v "$VALIDATION_DATA_DIR" \
+        -p "$PHOTOMETRIC_REF_CAT_DIR" \
         -f "$CONFIG_FILE" \
         -o "--filetype instcal" \
         -i ingestImagesDecam.py
