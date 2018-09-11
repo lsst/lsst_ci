@@ -1,6 +1,8 @@
 setupRequired(lsst_apps)
 setupRequired(lsst_distrib)
 
+setupRequired(lsst_dm_stack_demo)
+
 setupRequired(testdata_subaru)
 setupRequired(testdata_cfht)
 setupRequired(testdata_decam)
