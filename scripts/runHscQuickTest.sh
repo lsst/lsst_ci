@@ -7,6 +7,8 @@ if [[ ${PRODUCT_DIR} == '' ]]; then
     PRODUCT_DIR='.'
 fi
 VALIDATION_DATA_DIR="$CI_HSC_DIR/raw"
+#  "ps1_pv3_3pi_20170110" is stored at the base level in ci_hsc.
+PHOTOMETRIC_REF_CAT_DIR="$CI_HSC_DIR"
 CALIB_DATA="$CI_HSC_DIR/CALIB"
 
 CAMERA=HscQuick

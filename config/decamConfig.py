@@ -2,9 +2,5 @@
 from lsst.obs.decam.decamNullIsr import DecamNullIsrTask
 config.processCcd.isr.retarget(DecamNullIsrTask)
 
-from lsst.pipe.tasks.setConfigFromEups import setPhotocalConfigFromEups
-from lsst.meas.extensions.astrometryNet import LoadAstrometryNetObjectsTask
-config.processCcd.calibrate.astromRefObjLoader.retarget(LoadAstrometryNetObjectsTask)
-config.processCcd.calibrate.photoRefObjLoader.retarget(LoadAstrometryNetObjectsTask)
-
-setPhotocalConfigFromEups(config.processCcd.calibrate.photoCal)
+from lsst.meas.astrom.matchPessimisticB import MatchPessimisticBTask
+config.processCcd.calibrate.astrometry.matcher.retarget(MatchPessimisticBTask)

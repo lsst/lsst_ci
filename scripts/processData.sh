@@ -8,7 +8,6 @@ print_error() {
 
 INGEST=ingestImages.py
 INGESTEXT=fz
-ASTROMDIR=astrometry_net_data
 
 usage() {
     print_error
@@ -18,6 +17,7 @@ usage() {
     print_error "   -c          Camera"
     print_error "   -m          Mapper"
     print_error "   -v          Validation data"
+    print_error "   -p          Photometric reference catalog"
     print_error "   -f          Config file"
     print_error "   -i          Ingest script"
     print_error "   -o          Extra options for ingest script"
@@ -29,16 +29,16 @@ usage() {
     exit 1
 }
 
-while getopts "c:m:v:f:i:o:e:a:d:hr" option; do
+while getopts "c:m:v:p:f:i:o:e:a:d:hr" option; do
     case "$option" in
         c)  CAMERA="$OPTARG";;
         m)  MAPPER="$OPTARG";;
         v)  VALIDATION_DATA="$OPTARG";;
+        p)  PHOTOMETRIC_REF_CAT="$OPTARG";;
         f)  CONFIG_FILE="$OPTARG";;
         i)  INGEST="$OPTARG";;
         o)  INGESTARGS="$OPTARG";;
         e)  INGESTEXT="$OPTARG";;
-        a)  ASTROMDIR="$OPTARG";;
         r)  DOCALIB=true;;
         d)  CALIB_DATA="$OPTARG";;
         h)  usage;;
@@ -74,14 +74,13 @@ echo "$MAPPER" > "${INPUT}"/_mapper
 RAWDATA=${VALIDATION_DATA}
 $INGEST "${INPUT}" "${RAWDATA}"/*."${INGESTEXT}" --mode link ${INGESTARGS}
 
+# link reference catalogs
+ln -s ${PHOTOMETRIC_REF_CAT} ${INPUT}/ref_cats
+
 # set up calibs
 if [[ $DOCALIB == true ]]; then
     ln -s "${CALIB_DATA}" "${WORKSPACE}"/CALIB
 fi
-
-# Set up astrometry
-export SETUP_ASTROMETRY_NET_DATA="astrometry_net_data ${ASTROMDIR}"
-export ASTROMETRY_NET_DATA_DIR="${VALIDATION_DATA}"/../"${ASTROMDIR}"
 
 # Create calexps and src
 echo "running singleFrameDriver"
