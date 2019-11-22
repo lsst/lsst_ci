@@ -7,3 +7,4 @@ bin/
 tests/.tests
 __pycache__
 python/
+pytest_session.txt
