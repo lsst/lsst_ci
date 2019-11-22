@@ -20,16 +20,33 @@
 # see <http://www.lsstcorp.org/LegalNotices/>.
 #
 
+import os
+import shutil
+import tempfile
 import unittest
 
 import lsst.utils
 import lsst.utils.tests
 
-executable_dir = 'scripts'
+TESTDIR = os.path.abspath(os.path.dirname(__file__))
+executable_dir = os.path.join(TESTDIR, os.path.pardir, "scripts")
 
 
 class ExampleObsTestCase(lsst.utils.tests.ExecutablesTestCase):
     """Test an example obs_ processing run."""
+
+    def setUp(self):
+        self.root = tempfile.mkdtemp(dir=TESTDIR)
+        # The test scripts themselves do not yet have the ability
+        # to specify an output directory so we change directory here.
+        self.cwd = os.getcwd()
+        os.chdir(self.root)
+
+    def tearDown(self):
+        os.chdir(self.cwd)
+        if self.root is not None and os.path.exists(self.root):
+            shutil.rmtree(self.root, ignore_errors=True)
+
     def testObsCfhtQuick(self):
         """Test obs_cfht"""
         self.assertExecutable("runCfhtQuickTest.sh",
