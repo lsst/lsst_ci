@@ -1,3 +1,9 @@
 .scon*
 config.log
 ups/*.cfgc
+_build.*
+.coverage
+bin/
+tests/.tests
+__pycache__
+python/
