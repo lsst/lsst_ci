@@ -32,6 +32,20 @@ TESTDIR = os.path.abspath(os.path.dirname(__file__))
 executable_dir = os.path.join(TESTDIR, os.path.pardir, "scripts")
 
 
+def assertWrapper(func):
+    """Decorator to intercept AssertionError and reraise whilst recording
+    a failure."""
+    def wrapped(self):
+        try:
+            func(self)
+            self.failed = False
+        except AssertionError:
+            self.failed = True
+            raise
+
+    return wrapped
+
+
 class ExampleObsTestCase(lsst.utils.tests.ExecutablesTestCase):
     """Test an example obs_ processing run."""
 
@@ -54,27 +68,21 @@ class ExampleObsTestCase(lsst.utils.tests.ExecutablesTestCase):
             else:
                 shutil.rmtree(self.root, ignore_errors=True)
 
+    @assertWrapper
     def testObsCfhtQuick(self):
         """Test obs_cfht"""
-        try:
-            self.assertExecutable("runCfhtQuickTest.sh",
-                                  root_dir=executable_dir,
-                                  args=["--", "--noplot"],
-                                  msg="CFHT Quick Test failed")
-        except AssertionError:
-            self.failed = True
-            raise
+        self.assertExecutable("runCfhtQuickTest.sh",
+                              root_dir=executable_dir,
+                              args=["--", "--noplot"],
+                              msg="CFHT Quick Test failed")
 
+    @assertWrapper
     def testObsDecamQuick(self):
         """Test obs_decam"""
-        try:
-            self.assertExecutable("runDecamQuickTest.sh",
-                                  root_dir=executable_dir,
-                                  args=["--", "--noplot"],
-                                  msg="DECam Quick Test failed")
-        except AssertionError:
-            self.failed = True
-            raise
+        self.assertExecutable("runDecamQuickTest.sh",
+                              root_dir=executable_dir,
+                              args=["--", "--noplot"],
+                              msg="DECam Quick Test failed")
 
 
 if __name__ == "__main__":
