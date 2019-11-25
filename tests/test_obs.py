@@ -20,21 +20,55 @@
 # see <http://www.lsstcorp.org/LegalNotices/>.
 #
 
-from __future__ import print_function
-
-import pytest
-
 import os
+import shutil
+import tempfile
 import unittest
 
 import lsst.utils
 import lsst.utils.tests
 
-executable_dir = 'scripts'
+TESTDIR = os.path.abspath(os.path.dirname(__file__))
+executable_dir = os.path.join(TESTDIR, os.path.pardir, "scripts")
+
+
+def assertWrapper(func):
+    """Decorator to intercept AssertionError and reraise whilst recording
+    a failure."""
+    def wrapped(self):
+        try:
+            func(self)
+            self.failed = False
+        except AssertionError:
+            self.failed = True
+            raise
+
+    return wrapped
 
 
 class ExampleObsTestCase(lsst.utils.tests.ExecutablesTestCase):
     """Test an example obs_ processing run."""
+
+    def setUp(self):
+        self.root = tempfile.mkdtemp(dir=TESTDIR)
+        # The test scripts themselves do not yet have the ability
+        # to specify an output directory so we change directory here.
+        self.cwd = os.getcwd()
+        os.chdir(self.root)
+
+        # Track test failure
+        self.failed = False
+
+    def tearDown(self):
+        os.chdir(self.cwd)
+        if self.root is not None and os.path.exists(self.root):
+            # Clean up the test data unless there was a failure.
+            if self.failed:
+                print(f"Output test data located in {self.root}")
+            else:
+                shutil.rmtree(self.root, ignore_errors=True)
+
+    @assertWrapper
     def testObsCfhtQuick(self):
         """Test obs_cfht"""
         self.assertExecutable("runCfhtQuickTest.sh",
@@ -42,6 +76,7 @@ class ExampleObsTestCase(lsst.utils.tests.ExecutablesTestCase):
                               args=["--", "--noplot"],
                               msg="CFHT Quick Test failed")
 
+    @assertWrapper
     def testObsDecamQuick(self):
         """Test obs_decam"""
         self.assertExecutable("runDecamQuickTest.sh",
