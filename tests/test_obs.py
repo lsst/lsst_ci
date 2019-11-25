@@ -42,24 +42,39 @@ class ExampleObsTestCase(lsst.utils.tests.ExecutablesTestCase):
         self.cwd = os.getcwd()
         os.chdir(self.root)
 
+        # Track test failure
+        self.failed = False
+
     def tearDown(self):
         os.chdir(self.cwd)
         if self.root is not None and os.path.exists(self.root):
-            shutil.rmtree(self.root, ignore_errors=True)
+            # Clean up the test data unless there was a failure.
+            if self.failed:
+                print(f"Output test data located in {self.root}")
+            else:
+                shutil.rmtree(self.root, ignore_errors=True)
 
     def testObsCfhtQuick(self):
         """Test obs_cfht"""
-        self.assertExecutable("runCfhtQuickTest.sh",
-                              root_dir=executable_dir,
-                              args=["--", "--noplot"],
-                              msg="CFHT Quick Test failed")
+        try:
+            self.assertExecutable("runCfhtQuickTest.sh",
+                                  root_dir=executable_dir,
+                                  args=["--", "--noplot"],
+                                  msg="CFHT Quick Test failed")
+        except AssertionError:
+            self.failed = True
+            raise
 
     def testObsDecamQuick(self):
         """Test obs_decam"""
-        self.assertExecutable("runDecamQuickTest.sh",
-                              root_dir=executable_dir,
-                              args=["--", "--noplot"],
-                              msg="DECam Quick Test failed")
+        try:
+            self.assertExecutable("runDecamQuickTest.sh",
+                                  root_dir=executable_dir,
+                                  args=["--", "--noplot"],
+                                  msg="DECam Quick Test failed")
+        except AssertionError:
+            self.failed = True
+            raise
 
 
 if __name__ == "__main__":
