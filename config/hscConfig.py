@@ -25,3 +25,8 @@ menu = { "ps1*": {}, # No changes
 # Both configs need to have the filterMap set
 setAstrometryConfigFromEups(config.processCcd.calibrate.photoRefObjLoader, menu)
 setAstrometryConfigFromEups(config.processCcd.calibrate.astromRefObjLoader, menu)
+
+# Run meas_modelfit to compute CModel fluxes
+config.processCcd.calibrate.measurement.plugins.names |= [
+            "modelfit_DoubleShapeletPsfApprox", "modelfit_CModel"]
+config.processCcd.calibrate.measurement.slots.modelFlux = 'modelfit_CModel'
