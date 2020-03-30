@@ -1,6 +1,6 @@
 # Configuration information for validate_drp to 
 # build the list of data IDs to analyze
-brightSnr: 100  # Only consider stars bright than this limit
+brightSnrMin: 50  # Only consider stars bright than this limit
 # Visit - filter are matched pairs.
 visits: [176837, 176839, 176840, 176841, 176842, 176843, 176844, 176845, 176846,
          177341, 177342, 177343, 177344, 177345, 177346,]
