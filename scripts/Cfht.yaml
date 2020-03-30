@@ -1,6 +1,6 @@
 # Configuration information for validate_drp to 
 # build the list of data IDs to analyze
-brightSnr: 100  # Only consider stars with higher S/N than this limit
+brightSnrMin: 50  # Only consider stars with higher S/N than this limit
 visits: [849375, 850587]
 filter: 'r'
 ccd: [12, 13, 14, 21, 22, 23]
