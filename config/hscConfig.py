@@ -10,10 +10,6 @@ config.processCcd.isr.doAttachTransmissionCurve = False
 # stray light correction
 config.processCcd.isr.doStrayLight = False
 
-from lsst.meas.extensions.astrometryNet import LoadAstrometryNetObjectsTask
-config.processCcd.calibrate.astromRefObjLoader.retarget(LoadAstrometryNetObjectsTask)
-config.processCcd.calibrate.photoRefObjLoader.retarget(LoadAstrometryNetObjectsTask)
-
 # Run meas_modelfit to compute CModel fluxes
 config.processCcd.calibrate.measurement.plugins.names |= [
             "modelfit_DoubleShapeletPsfApprox", "modelfit_CModel"]
