@@ -1,5 +1,6 @@
 """
 THE ASTROMETRY_NET_DATA NO LONGER EXISTS IN PIPE_TASKS see
+https://jira.lsstcorp.org/browse/DM-22233
 
 """
 
