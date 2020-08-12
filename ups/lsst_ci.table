@@ -5,6 +5,7 @@ setupRequired(lsst_distrib)
 setupRequired(lsst_obs)
 
 setupRequired(lsst_dm_stack_demo)
+setupRequired(pipelines_check)
 
 setupRequired(testdata_subaru)
 setupRequired(testdata_cfht)
