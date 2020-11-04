@@ -4,7 +4,6 @@ setupRequired(lsst_distrib)
 # Ensure obs packages are available (should be setup by lsst_distrib)
 setupRequired(lsst_obs)
 
-setupRequired(lsst_dm_stack_demo)
 setupRequired(pipelines_check)
 
 setupRequired(testdata_subaru)
