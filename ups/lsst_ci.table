@@ -9,8 +9,3 @@ setupRequired(pipelines_check)
 setupRequired(testdata_subaru)
 setupRequired(testdata_cfht)
 setupRequired(testdata_decam)
-
-setupRequired(validation_data_cfht)
-setupRequired(validation_data_decam)
-
-setupRequired(validate_drp)

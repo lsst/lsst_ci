@@ -1,8 +1,0 @@
-# Configuration information for validate_drp to 
-# build the list of data IDs to analyze
-brightSnrMin: 50  # Only consider stars with higher S/N than this limit
-visits: [176837, 176846]
-filter: 'z'
-ccdnum: [10, 11, 12, 13, 14, 15, 16, 17, 18]
-instrument: 'DECAM'
-dataset_repo_url: 'https://github.com/lsst/validation_data_decam.git'
