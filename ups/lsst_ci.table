@@ -1,5 +1,6 @@
 setupRequired(lsst_apps)
 setupRequired(lsst_distrib)
+setupRequired(lsst_sitcom)
 
 # Ensure obs packages are available (should be setup by lsst_distrib)
 setupRequired(lsst_obs)
