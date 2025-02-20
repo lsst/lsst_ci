@@ -7,6 +7,6 @@ setupRequired(lsst_obs)
 
 setupRequired(pipelines_check)
 
-setupRequired(testdata_subaru)
-setupRequired(testdata_cfht)
-setupRequired(testdata_decam)
+setupOptional(testdata_subaru)
+setupOptional(testdata_cfht)
+setupOptional(testdata_decam)
